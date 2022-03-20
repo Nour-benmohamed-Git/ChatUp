@@ -12,9 +12,16 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useNavigation} from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../navigators/RootStackNavigator';
+
 type Props = {};
+type rootStackNavigationType=NativeStackNavigationProp<RootStackParamList,"SignIn">;
+
 
 function SignIn({}: Props) {
+  const navigation = useNavigation<rootStackNavigationType>();
   return (
     <>
       <LinearGradient
@@ -24,7 +31,7 @@ function SignIn({}: Props) {
         colors={['#f3ca20', '#000000']}
         style={styles.linearGradient}>
         <StatusBar backgroundColor="#f3ca20" />
-        
+
         <Image
           style={styles.tinyLogo}
           source={require('../../public/images/Logo.jpg')}
@@ -79,32 +86,65 @@ function SignIn({}: Props) {
             }}>
             <Text
               style={{
-                color: '#3b4d61',
+                color: '#000000',
                 fontSize: 14,
               }}>
               Cannot access your account?
             </Text>
           </TouchableOpacity>
-
-          <TouchableOpacity
-            style={{alignSelf: 'center', marginTop: '5%', flex: 0.3}}>
-            <LinearGradient
-              start={{x: 0, y: 0}}
-              end={{x: 1, y: 1}}
-              locations={[0.5, 0.5]}
-              colors={['#f3ca20', '#000000']}
+          <View style={styles.actions}>
+            {/* to pass a param u do like this navigation.navigate('SignUp',{}) */}
+            <TouchableOpacity
+              onPress={() => navigation.navigate('SignUp')}
               style={{
-                borderWidth: 0.8,
-                borderRadius: 15,
-
-                paddingVertical: 8,
-                paddingHorizontal: 40,
+                height: 60,
+                justifyContent: 'center',
+                alignItems: 'center',
               }}>
-              <Text style={{fontSize: 18, fontWeight: 'bold', color: '#fff'}}>
-                Sign In
-              </Text>
-            </LinearGradient>
-          </TouchableOpacity>
+              <LinearGradient
+                start={{x: 0, y: 0}}
+                end={{x: 1, y: 1}}
+                locations={[0.5, 0.5]}
+                colors={['#f3ca20', '#000000']}
+                style={{
+                  borderWidth: 0.8,
+                  borderRadius: 15,
+                  paddingVertical: 8,
+                  width: 150,
+                  alignItems: 'center',
+                }}>
+                <Text style={{fontSize: 18, fontWeight: 'bold', color: '#fff'}}>
+                  Sign In
+                </Text>
+              </LinearGradient>
+            </TouchableOpacity>
+            <Text style={{fontSize: 14, color: '#000000'}}>
+                 OR
+            </Text>
+            <TouchableOpacity
+              style={{
+                height: 60,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <LinearGradient
+                start={{x: 0, y: 0}}
+                end={{x: 1, y: 1}}
+                locations={[0.5, 0.5]}
+                colors={['#000000', '#f3ca20']}
+                style={{
+                  borderWidth: 0.8,
+                  borderRadius: 15,
+                  paddingVertical: 8,
+                  width: 150,
+                  alignItems: 'center',
+                }}>
+                <Text style={{fontSize: 18, fontWeight: 'bold', color: '#fff'}}>
+                  Sign up
+                </Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
         </View>
       </LinearGradient>
     </>
@@ -115,6 +155,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   tinyLogo: {
+    marginTop: '2%',
     width: 230,
     height: 180,
     alignSelf: 'center',
@@ -128,6 +169,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     opacity: 0.7,
     justifyContent: 'center',
+    marginTop: '5%',
   },
   text: {
     marginTop: '5%',
@@ -148,6 +190,11 @@ const styles = StyleSheet.create({
   textInput: {
     flex: 1,
     color: '#000000',
+  },
+  actions: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

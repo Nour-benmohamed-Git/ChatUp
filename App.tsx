@@ -9,9 +9,15 @@
  */
 
  import React from 'react';
- import SignIn from './pages/auth/SignIn';
- const App = () => {
-   return <SignIn />;
- };
- export default App;
+import {NavigationContainer} from '@react-navigation/native';
+import RootStackNavigator from './navigators/RootStackNavigator';
+
+const App = () => {
+  return (
+    <NavigationContainer>
+      <RootStackNavigator />
+    </NavigationContainer>
+  );
+};
+export default App;
  
